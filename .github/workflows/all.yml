@@ -15,7 +15,7 @@ jobs:
 
   sofia_build_rpm:
     name: 'Build Rpm'
-    uses: signalwire/actions-template/.github/workflows/ci-rpm-packages.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/ci-rpm-packages.yml@TEST
     with:
       PROJECT_NAME: sofia-sip
       RUNNER: ubuntu-latest
@@ -25,7 +25,7 @@ jobs:
 
   sofia_build_deb:
     name: 'Build Deb'
-    uses: signalwire/actions-template/.github/workflows/ci-deb-packages-v2.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/ci-deb-packages-v2.yml@TEST
     strategy:
       fail-fast: false
       matrix:
@@ -53,7 +53,7 @@ jobs:
           - deb-arm
           - rpm-amd64
     
-    uses: signalwire/actions-template/.github/workflows/ci-libs-metadata-v2.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/ci-libs-metadata-v2.yml@TEST
     with:
       ARTIFACT_NAME: ${{ matrix.platform }}-artifact
       OS_PLATFORM: ${{ matrix.platform }}
@@ -71,7 +71,7 @@ jobs:
           - deb-arm
           - rpm-amd64
     
-    uses: signalwire/actions-template/.github/workflows/cd-scp.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/cd-scp.yml@TEST
     with:
       ARTIFACT_NAME: ${{ matrix.os_platform }}-artifact
       TARGET_FOLDER: /var/www/sofia-${{ matrix.os_platform }}/${{github.run_id}}-${{github.run_number}}
@@ -97,7 +97,7 @@ jobs:
           - amd64
           - arm
     
-    uses: signalwire/actions-template/.github/workflows/cd-libs-metadata.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/cd-libs-metadata.yml@TEST
     with:
       ARTIFACT_NAME: ${{ matrix.os }}-${{matrix.platform}}-meta
       LIB_NAME: sofia-sip
@@ -119,7 +119,7 @@ jobs:
         platform:
           - amd64
     
-    uses: signalwire/actions-template/.github/workflows/cd-libs-metadata.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/cd-libs-metadata.yml@TEST
     with:
       ARTIFACT_NAME: ${{ matrix.os }}-${{matrix.platform}}-meta
       LIB_NAME: sofia-sip
@@ -134,7 +134,7 @@ jobs:
     permissions: write-all
     name: 'Copy hash to remote'
     needs: [distribute_meta_deb, distribute_meta_rpm]
-    uses: signalwire/actions-template/.github/workflows/cd-scp.yml@main
+    uses: s3rj1k/actions-template/.github/workflows/cd-scp.yml@TEST
     strategy:
       matrix:
         os_platform:
