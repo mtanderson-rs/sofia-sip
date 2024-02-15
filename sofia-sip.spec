@@ -58,12 +58,12 @@ Requires:       sofia-sip = %{version}-%{release}
 Command line utilities for the Sofia SIP UA library.
 
 %prep
-%setup0 -q -n sofia-sip-%{version}%{?work:work%{work}}
+%setup0 -q -n sofia-sip-%{version}
 
 
 %build
 ./autogen.sh
-%configure --disable-rpath --disable-static --without-doxygen --disable-stun
+%configure --disable-rpath --disable-static --without-doxygen --disable-stun --enable-64
 make %{?_smp_mflags}
 #make doxygen
 
